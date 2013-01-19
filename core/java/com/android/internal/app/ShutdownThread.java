@@ -50,6 +50,9 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.io.OutputStreamWriter;
 
+import java.io.File;
+import java.io.IOException;
+
 public final class ShutdownThread extends Thread {
     // constants
     private static final String TAG = "ShutdownThread";
@@ -491,6 +494,21 @@ public final class ShutdownThread extends Thread {
      */
     public static void rebootOrShutdown(boolean reboot, String reason) {
         if (reboot) {
+	        // Reboot to CWM
+	        if (reason != null) {
+			if (reason.equals("cwm")) {
+				Log.d(TAG, "Rebooting to ClockworkMod recovery...");
+				try { 
+					File file = new File("/cache/recovery/boot");
+					if(!file.exists())
+						file.createNewFile();
+				}
+				catch(IOException e) { 
+					Log.d(TAG, "cannot create file?");
+					e.printStackTrace();
+				}
+			}
+		}
             Log.i(TAG, "Rebooting, reason: " + reason);
             try {
                 Power.reboot(reason);

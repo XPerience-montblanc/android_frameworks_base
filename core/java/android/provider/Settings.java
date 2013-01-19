@@ -1120,6 +1120,11 @@ public final class Settings {
          */
         public static final Uri CONTENT_URI =
             Uri.parse("content://" + AUTHORITY + "/system");
+        /**
+         * Center Clock
+         * @hide  
+         */
+        public static final String CENTER_CLOCK_STATUS_BAR = "center_clock_status_bar";
 
         /**
          * Whether we keep the device on while the device is plugged in.
