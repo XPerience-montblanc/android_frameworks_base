@@ -352,8 +352,13 @@ public class PhoneStatusBar extends StatusBar {
         mIntruderAlertView.setVisibility(View.GONE);
         mIntruderAlertView.setClickable(true);
 
-        PhoneStatusBarView sb = (PhoneStatusBarView)View.inflate(context,
-                R.layout.status_bar, null);
+        PhoneStatusBarView sb = null;
+
+        if(Settings.System.getInt(mContext.getContentResolver(), Settings.System.CENTER_CLOCK_STATUS_BAR, 0) == 0)
+            sb = (PhoneStatusBarView)View.inflate(context, R.layout.status_bar, null);
+        else
+            sb = (PhoneStatusBarView)View.inflate(context, R.layout.status_bar_middle_clock, null);
+
         sb.mService = this;
         mStatusBarView = sb;
 
